@@ -15,6 +15,7 @@ import { AvatarDialogComponent } from './avatar-dialog/avatar-dialog.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MatDialogModule} from '@angular/material';
+import {MatInputModule} from '@angular/material/input';
 
 
 
@@ -24,6 +25,9 @@ import { RouterModule } from '@angular/router';
 // import { EditUserResolver } from './edit-user/edit-user.resolver';
 // import { HomeComponent } from './home/home.component';
 import { FirebaseService } from './shared/services/firebase.service';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { UserComponent } from './user/user.component';
 
 
 @NgModule({
@@ -31,7 +35,10 @@ import { FirebaseService } from './shared/services/firebase.service';
     AppComponent,
     PageComponent,
     NewUserComponent,
-    AvatarDialogComponent
+    AvatarDialogComponent,
+    LoginComponent,
+    RegisterComponent,
+    UserComponent
   ],
   imports: [
     MatButtonModule,
@@ -45,7 +52,8 @@ import { FirebaseService } from './shared/services/firebase.service';
     ReactiveFormsModule,  
     // RouterModule.forRoot(rootRouterConfig, { useHash: false }),
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatInputModule
   ],
   providers: [FirebaseService, ContentService],
   bootstrap: [AppComponent],
