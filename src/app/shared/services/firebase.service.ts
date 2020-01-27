@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import * as firebase from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
@@ -41,12 +42,15 @@ export class FirebaseService {
 
 
   createUser(value, avatar){
-    return this.db.collection('users').add({
+    return this.db.collection('users').doc(firebase.auth().currentUser.uid).set({
       name: value.name,
-      nameToSearch: value.name.toLowerCase(),
+      // nameToSearch: value.name.toLowerCase()
       surname: value.surname,
       age: parseInt(value.age),
-      avatar: avatar
+      avatar: avatar,
+      weight: parseInt(value.weight),
+      exerciseExperience: value.exerciseExperience,
+      daysWeek: value.daysWeek
     });
   }
 }

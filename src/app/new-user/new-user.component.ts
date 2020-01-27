@@ -5,6 +5,11 @@ import { AvatarDialogComponent } from "../avatar-dialog/avatar-dialog.component"
 import { Router } from '@angular/router';
 import { FirebaseService } from '../shared/services/firebase.service';
 
+export interface Experience {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-new-user',
   templateUrl: './new-user.component.html',
@@ -27,6 +32,12 @@ export class NewUserComponent implements OnInit {
    ]
  };
 
+  experience: Experience[] = [
+    {value: 'none', viewValue: 'None'},
+    {value: 'some', viewValue: 'Some'},
+    {value: 'loads', viewValue: 'Loads'}
+  ];
+
   constructor(
     private fb: FormBuilder,
     public dialog: MatDialog,
@@ -42,7 +53,10 @@ export class NewUserComponent implements OnInit {
     this.exampleForm = this.fb.group({
       name: ['', Validators.required ],
       surname: ['', Validators.required ],
-      age: ['', Validators.required ]
+      age: ['', Validators.required ],
+      weight: ['', Validators.required ],
+      exerciseExperience: ['', Validators.required ],
+      daysWeek: ['', Validators.required ]
     });
   }
 
@@ -65,6 +79,9 @@ export class NewUserComponent implements OnInit {
       name: new FormControl('', Validators.required),
       surname: new FormControl('', Validators.required),
       age: new FormControl('', Validators.required),
+      weight: new FormControl('', Validators.required),
+      exerciseExperience: new FormControl('', Validators.required),
+      daysWeek: new FormControl('', Validators.required)
     });
   }
 

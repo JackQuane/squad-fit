@@ -16,6 +16,14 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MatDialogModule} from '@angular/material';
 import {MatInputModule} from '@angular/material/input';
+import { UserResolver } from './user/user.resolver';
+import { AuthGuard } from './auth.guard';
+import { AuthService } from './auth.service';
+import { UserService } from './user.service';
+import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import {MatSelectModule} from '@angular/material/select';
+
 
 
 
@@ -53,9 +61,11 @@ import { UserComponent } from './user/user.component';
     // RouterModule.forRoot(rootRouterConfig, { useHash: false }),
     FormsModule,
     MatDialogModule,
-    MatInputModule
+    MatInputModule,
+    AngularFireAuthModule,
+    MatSelectModule
   ],
-  providers: [FirebaseService, ContentService],
+  providers: [FirebaseService, ContentService, AuthService, UserService, UserResolver, AuthGuard, AngularFireAuthGuard],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
