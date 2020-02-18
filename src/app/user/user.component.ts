@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FirebaseUserModel } from '../user.model';
+import { ExerciseTableComponent } from '../exercise-table/exercise-table.component';
 
 @Component({
   selector: 'page-user',

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MatButtonModule, MatCardModule, MatToolbarModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatToolbarModule, MatTableModule, MatFormField, MatSortModule, MatFormFieldModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -15,7 +15,7 @@ import { AvatarDialogComponent } from './avatar-dialog/avatar-dialog.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MatDialogModule} from '@angular/material';
-import {MatInputModule} from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { UserResolver } from './user/user.resolver';
 import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
@@ -23,7 +23,6 @@ import { UserService } from './user.service';
 import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import {MatSelectModule} from '@angular/material/select';
-
 
 
 
@@ -36,7 +35,7 @@ import { FirebaseService } from './shared/services/firebase.service';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UserComponent } from './user/user.component';
-
+import { ExerciseTableComponent } from './exercise-table/exercise-table.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +45,8 @@ import { UserComponent } from './user/user.component';
     AvatarDialogComponent,
     LoginComponent,
     RegisterComponent,
-    UserComponent
+    UserComponent,
+    ExerciseTableComponent
   ],
   imports: [
     MatButtonModule,
@@ -61,6 +61,9 @@ import { UserComponent } from './user/user.component';
     // RouterModule.forRoot(rootRouterConfig, { useHash: false }),
     FormsModule,
     MatDialogModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatSortModule,
     MatInputModule,
     AngularFireAuthModule,
     MatSelectModule
