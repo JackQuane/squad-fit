@@ -60,7 +60,7 @@ import { LeaderboardComponent } from './leaderboard/leaderboard.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     ReactiveFormsModule,  
-    RouterModule.forRoot(rootRouterConfig, { useHash: false }),
+    // RouterModule.forRoot(rootRouterConfig, { useHash: false }),
     FormsModule,
     MatDialogModule,
     MatTableModule,

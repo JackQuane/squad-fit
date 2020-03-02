@@ -33,7 +33,7 @@ export class AuthService {
         resolve(res);
       }, err => {
         console.log(err);
-        // reject(err);
+        reject(err);
       })
     })
   }
@@ -49,7 +49,7 @@ export class AuthService {
         resolve(res);
       }, err => {
         console.log(err);
-        // reject(err);
+        reject(err);
       })
     })
   }
