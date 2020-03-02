@@ -26,8 +26,31 @@ export class FirebaseService {
     return this.db.collection('users').doc(userKey).delete();
   }
 
-  getUsers(){
-    return this.db.collection('users').snapshotChanges();
+  // getUsers(){
+  //   return this.db.collection('users').snapshotChanges();
+  // }
+
+  getUserData(){
+    // var dbRef =  this.db.collection('users').doc(firebase.auth().currentUser.uid).snapshotChanges().subscribe(data => console.log(data));
+    // console.log("getUserData");
+    // var x = 897;
+   var  x = this.db.collection('users').doc(firebase.auth().currentUser.uid).ref.get().then(function(doc) {
+                if (doc.exists) {
+                    // console.log("Document data:", doc.data());
+                    // x = doc.data();
+                    return doc.data();
+                } else {
+                    console.log("No such document!");
+                }
+            }).catch(function(error) {
+                console.log("Error getting document:", error);
+            });
+
+    return x;
+
+    // return dbRef;
+    // .pipe(map((response: any) => response.json()));
+    // return firebase.auth().currentUser.uid;
   }
 
   searchUsers(searchValue){
@@ -42,6 +65,10 @@ export class FirebaseService {
 
 
   createUser(value, avatar){
+
+    var sNum: number = this.assignSquadNum(value);
+    console.log(sNum);
+
     return this.db.collection('users').doc(firebase.auth().currentUser.uid).set({
       name: value.name,
       // nameToSearch: value.name.toLowerCase()
@@ -50,8 +77,49 @@ export class FirebaseService {
       avatar: avatar,
       weight: parseInt(value.weight),
       exerciseExperience: value.exerciseExperience,
-      daysWeek: value.daysWeek
+      daysWeek: value.daysWeek,
+      points: 0,
+      squadNum: this.assignSquadNum(value),
+      completedTasks: [null]
     });
+
   }
+
+  assignSquadNum(value){
+      var exp: string = value.exerciseExperience;
+      var daysWk: number = value.daysWeek;
+      var squadNum: number;
+
+      if(exp == "none" && daysWk < 4){
+        squadNum = 1;
+        console.log(squadNum);
+      } else if (exp == "some" && daysWk < 6){
+        squadNum = 2;
+        console.log(squadNum);
+      } else if (exp == "loads"){
+        squadNum = 3;
+        console.log(squadNum);
+      }
+      return squadNum;
+  }
+
+//   writeNewFieldToCollectionDocs() {
+      
+//     for (let i=0; i<75; i++) {
+//       this.db.collection('exercises').doc('i').update({
+//           difficulty: 0
+//       })
+//           .then(function () {
+//               console.log("Document successfully updated!");
+//           }).catch(function (error) {
+//               console.error("Error removing document: ", error);
+
+//           });
+//     }
+
+
+// }
+
+
 }
   

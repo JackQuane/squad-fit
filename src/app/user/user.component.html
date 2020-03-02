@@ -1,19 +1,27 @@
 <nav class="navbar navbar-default navbar-static-top navbar-inverse">
     <div class="container">
-      <a (click)="logout()" class="navbar-text navbar-right navbar-link">Logout</a>
+      <!-- <a (click)="logout()" class="navbar-text navbar-right navbar-link">Logout</a> -->
+      <button (click)="logout()" >Logout</button>
     </div>
   </nav>
-  <exercise-table></exercise-table>
-  <h1 class="header">Logged User Page</h1>
+  <!-- <app-exercise-table></app-exercise-table> -->
+  <!-- <h1 class="header">User Page</h1> -->
   <div class="row">
     <div class="col-md-4 col-md-offset-4">
       <div class="card" style="width: 20rem;">
         <img class="card-img-top image" [src]="user.image" *ngIf="user.image" alt="User image">
         <img class="card-img-top image" src="https://via.placeholder.com/400x300" *ngIf="!user.image" alt="User image">
         <div *ngIf='user.provider != "password"'class="card-body">
-          <h4 class="card-title">{{user.name}}</h4>
-          <p class="card-text">Welcome back to SQUADFIT!</p>
+          <!-- <h4 class="card-title">{{user.name}}</h4> -->
+          <mat-card class="cards"> 
+            <p class="card-text">Welcome back to SQUADFIT!</p>
+          </mat-card>
+          <button (click)="getUserSquadNum()" mat-button>Click me!</button>
+          <mat-card class="cards"> 
+            <p class="card-text">You have completed {{userData.completedTasks.length}} out of 7 challenges this week!</p>
+          </mat-card>
         </div>
+        <!-- for first time eamil user -->
         <div *ngIf='user.provider == "password"'class="card-body">
           <form [formGroup]="profileForm">
             <div class="form-group">
@@ -22,6 +30,70 @@
             </div>
           </form>
           <a (click)="save(profileForm.value)" class="btn btn-primary">Save</a>
+        </div>
+        <!-- <div>
+          <table mat-table [dataSource]="userData" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="position">
+              <th mat-header-cell *matHeaderCellDef> No. </th>
+              <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="weight">
+              <th mat-header-cell *matHeaderCellDef> Weight </th>
+              <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="symbol">
+              <th mat-header-cell *matHeaderCellDef> Symbol </th>
+              <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div> -->
+        <div>
+          <mat-card class="example-card">
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image"></div>
+              <mat-card-title>{{userData.name}} {{userData.surname}}</mat-card-title>
+              <mat-card-subtitle>Your Details</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              
+                <div>
+                  Weight:
+                  {{userData.weight}} Kg
+                </div>
+                <div>
+                  Squad Number:
+                  {{userData.squadNum}}
+                </div>
+                <div>
+                  Points:
+                  {{userData.points}}
+                </div>
+                <div>
+                  Completed Tasks:
+                  <ul *ngFor="let task of userData.completedTasks">
+                    <li>{{task}}</li>
+                  </ul>
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-button>SHARE</button>
+            </mat-card-actions>
+          </mat-card>
+          
         </div>
       </div>
     </div>

@@ -36,6 +36,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UserComponent } from './user/user.component';
 import { ExerciseTableComponent } from './exercise-table/exercise-table.component';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { ExerciseTableComponent } from './exercise-table/exercise-table.componen
     LoginComponent,
     RegisterComponent,
     UserComponent,
-    ExerciseTableComponent
+    ExerciseTableComponent,
+    LeaderboardComponent
   ],
   imports: [
     MatButtonModule,
@@ -58,7 +60,7 @@ import { ExerciseTableComponent } from './exercise-table/exercise-table.componen
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     ReactiveFormsModule,  
-    // RouterModule.forRoot(rootRouterConfig, { useHash: false }),
+    RouterModule.forRoot(rootRouterConfig, { useHash: false }),
     FormsModule,
     MatDialogModule,
     MatTableModule,

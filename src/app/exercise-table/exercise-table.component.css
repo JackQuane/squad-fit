@@ -1,0 +1,8 @@
+.basic-container {
+    padding: 30px;
+}
+
+.mat-cell {
+    padding: 8px 8px 8px 8px;
+    justify-content: center;
+  }

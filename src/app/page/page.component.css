@@ -2,11 +2,13 @@
     display: flex;
     height: 100%;
     align-items: center;
+    
 }
 
 mat-card {
     width:500px;
     background: rgba(255,255,255,0.9);
+    
 }
 
 mat-card-header {
@@ -23,3 +25,4 @@ mat-card-content {
     top: 0;
     left: 0;
 }
+

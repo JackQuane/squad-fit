@@ -33,7 +33,7 @@ export class AuthService {
         resolve(res);
       }, err => {
         console.log(err);
-        reject(err);
+        // reject(err);
       })
     })
   }
@@ -49,7 +49,7 @@ export class AuthService {
         resolve(res);
       }, err => {
         console.log(err);
-        reject(err);
+        // reject(err);
       })
     })
   }
@@ -59,9 +59,19 @@ export class AuthService {
       firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
       .then(res => {
         resolve(res);
-      }, err => reject(err))
+      })
+      .catch(err => console.log(err))
     })
   }
+
+  // doRegister(value){
+  //   return new Promise<any>((resolve, reject) => {
+  //     firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
+  //     .then(res => {
+  //       resolve(res);
+  //     }, err => reject(err))
+  //   })
+  // }
 
   doLogin(value){
     return new Promise<any>((resolve, reject) => {

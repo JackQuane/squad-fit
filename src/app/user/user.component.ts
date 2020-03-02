@@ -6,28 +6,39 @@ import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FirebaseUserModel } from '../user.model';
 import { ExerciseTableComponent } from '../exercise-table/exercise-table.component';
+import { FirebaseService } from '../shared/services/firebase.service';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import * as firebase from 'firebase/app';
+import {MatCardModule} from '@angular/material/card';
 
 @Component({
   selector: 'page-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
+
+
 export class UserComponent implements OnInit{
 
   user: FirebaseUserModel = new FirebaseUserModel();
   profileForm: FormGroup;
+  userData: any;
 
   constructor(
     public userService: UserService,
     public authService: AuthService,
     private route: ActivatedRoute,
     private location : Location,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public firebaseService: FirebaseService,
+    public firebaseAuth: AngularFireAuthModule
   ) {
 
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    // this.userData = await this.firebaseService.getUserData();
+
     this.route.data.subscribe(routeData => {
       let data = routeData['data'];
       if (data) {
@@ -58,4 +69,23 @@ export class UserComponent implements OnInit{
       console.log("Logout error", error);
     });
   }
+
+  getUserSquadNum(){
+    // FirebaseUser user = this.firebaseAuth.getInstance().getCurrentUser();
+    // var d;
+
+    // this.firebaseService.getUserData().then((docData) => {
+    //   console.log("User Data : " );
+    //   console.log(docData);
+    //   d = docData;
+
+    // })
+    // console.log(this.userData.age);
+    
+    // this.firebaseService.getUsers().subscribe(data => console.log(data));
+    // return userData;
+    
+    // this.firebaseService.writeNewFieldToCollectionDocs();
+  }
+
 }

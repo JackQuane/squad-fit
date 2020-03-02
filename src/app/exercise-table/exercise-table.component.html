@@ -6,21 +6,22 @@
               {{ exercise.technique }}
           </li>
       </ul> -->
+<div class="basic-container">
+  <div class="example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource" matSort [trackBy]="trackByUid" class="animate">
 
-<div class="example-container mat-elevation-z8">
-  <mat-table #table [dataSource]="dataSource" matSort [trackBy]="trackByUid" class="animate">
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+        <mat-cell *matCellDef="let exercise"> {{ exercise.name }} </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
-      <mat-cell *matCellDef="let exercise"> {{ exercise.name }} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="technique">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Technique </mat-header-cell>
+        <mat-cell *matCellDef="let exercise"> {{ exercise.technique }} </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="technique">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Technique </mat-header-cell>
-      <mat-cell *matCellDef="let exercise"> {{ exercise.technique }} </mat-cell>
-    </ng-container>
-
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" class="animate"></mat-row>
-  </mat-table>
+      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" class="animate"></mat-row>
+    </mat-table>
+  </div>
 </div>
