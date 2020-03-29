@@ -12,3 +12,8 @@
     color: red;
   }
   
+  .example-card {
+    max-width: 400px;
+    position: absolute;
+    left: 40%;
+  }

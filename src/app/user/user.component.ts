@@ -10,13 +10,13 @@ import { FirebaseService } from '../shared/services/firebase.service';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 import {MatCardModule} from '@angular/material/card';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
   selector: 'page-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
-
 
 export class UserComponent implements OnInit{
 
@@ -36,9 +36,10 @@ export class UserComponent implements OnInit{
 
   }
 
-  ngOnInit() {
-    // this.userData = await this.firebaseService.getUserData();
-
+  async ngOnInit() {
+    this.userData = await this.firebaseService.getUserData();
+    var d = await this.firebaseService.getSquadWeeklyExercises();
+    console.log("Exercises for this squad: " + d)
     this.route.data.subscribe(routeData => {
       let data = routeData['data'];
       if (data) {

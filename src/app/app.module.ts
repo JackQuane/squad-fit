@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,9 +23,7 @@ import { AuthService } from './auth.service';
 import { UserService } from './user.service';
 import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import {MatSelectModule} from '@angular/material/select';
-
-
+import { MatSelectModule } from '@angular/material/select';
 
 import { RouterModule } from '@angular/router';
 // import { rootRouterConfig } from './app.routes';
@@ -37,6 +36,7 @@ import { RegisterComponent } from './register/register.component';
 import { UserComponent } from './user/user.component';
 import { ExerciseTableComponent } from './exercise-table/exercise-table.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
+import { TasksComponent } from './tasks/tasks.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +48,8 @@ import { LeaderboardComponent } from './leaderboard/leaderboard.component';
     RegisterComponent,
     UserComponent,
     ExerciseTableComponent,
-    LeaderboardComponent
+    LeaderboardComponent,
+    TasksComponent
   ],
   imports: [
     MatButtonModule,
@@ -68,7 +69,8 @@ import { LeaderboardComponent } from './leaderboard/leaderboard.component';
     MatSortModule,
     MatInputModule,
     AngularFireAuthModule,
-    MatSelectModule
+    MatSelectModule,
+    FlexLayoutModule
   ],
   providers: [FirebaseService, ContentService, AuthService, UserService, UserResolver, AuthGuard, AngularFireAuthGuard],
   bootstrap: [AppComponent],

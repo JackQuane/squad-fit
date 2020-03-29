@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FirebaseService } from '../shared/services/firebase.service';
+import {MatTableModule} from '@angular/material/table';
+import { MatTableDataSource } from "@angular/material";
 
 @Component({
   selector: 'app-leaderboard',
@@ -7,9 +10,41 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LeaderboardComponent implements OnInit {
 
-  constructor() { }
+  userData: any;
+  userDataSource: any;
+  displayedColumns: string[] = ["name", "pointsWeek"];
+//  userDataSource: number[] = [
+//   8, 9, 7, 6, 7
+// ];
 
-  ngOnInit() {
+  constructor(public firebaseService: FirebaseService) { }
+
+  async ngOnInit() {
+    // this.userData = await this.firebaseService.getUserData();
+    //make new method that gets all users data
+    this.userData = await this.firebaseService.allUserData();
+    console.log(this.userData);
+    this.formatData();
   }
+
+  formatData() {
+    let list: string[][] = [];
+    let userTestStatus: { age: number, avatar: string, completedTasks: string[], 
+                          daysWeek: number, exerciseExperience: string, name: string, 
+                          points: number, squadNum: number, surname: string, weight: number}[] = [];
+   
+
+    this.userData.forEach(element => {
+      userTestStatus.push(element);
+      console.log("Element: " + JSON.stringify(element));
+    });
+
+    this.userDataSource = new MatTableDataSource(userTestStatus);
+  
+    console.log("new format: " + userTestStatus);
+  }
+
+
+
 
 }

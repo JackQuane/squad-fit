@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../auth.service'
 import { Router, Params } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
   selector: 'app-register',
@@ -33,14 +34,6 @@ export class RegisterComponent {
      this.authService.doFacebookLogin()
      .then(res =>{
        this.router.navigate(['new-user']);
-     }, err => console.log(err)
-     )
-   }
-
-   tryTwitterLogin(){
-     this.authService.doTwitterLogin()
-     .then(res =>{
-       this.router.navigate(['/new-user']);
      }, err => console.log(err)
      )
    }

@@ -26,3 +26,10 @@ mat-card-content {
     left: 0;
 }
 
+.example-card {
+    /* max-width: 400px; */
+    position: absolute;
+    top: 30%;
+    left: 30%;
+  }
+

@@ -31,9 +31,7 @@ export class FirebaseService {
   // }
 
   getUserData(){
-    // var dbRef =  this.db.collection('users').doc(firebase.auth().currentUser.uid).snapshotChanges().subscribe(data => console.log(data));
-    // console.log("getUserData");
-    // var x = 897;
+    // Gets user data of current user
    var  x = this.db.collection('users').doc(firebase.auth().currentUser.uid).ref.get().then(function(doc) {
                 if (doc.exists) {
                     // console.log("Document data:", doc.data());
@@ -47,11 +45,8 @@ export class FirebaseService {
             });
 
     return x;
-
-    // return dbRef;
-    // .pipe(map((response: any) => response.json()));
-    // return firebase.auth().currentUser.uid;
   }
+  
 
   searchUsers(searchValue){
     return this.db.collection('users',ref => ref.where('nameToSearch', '>=', searchValue)
@@ -62,7 +57,6 @@ export class FirebaseService {
   searchUsersByAge(value){
     return this.db.collection('users',ref => ref.orderBy('age').startAt(value)).snapshotChanges();
   }
-
 
   createUser(value, avatar){
 
@@ -103,6 +97,96 @@ export class FirebaseService {
       return squadNum;
   }
 
+  // async allUserData() {
+  //   const markers = [];
+  //   const snapshot = this.db.collection('users').get().then(querySnapshot => {
+  //     querySnapshot.docs.forEach(doc => {
+  //     markers.push(doc.data());
+  //   });
+  //   });
+  //   return markers;
+  //   // return snapshot.docs.map(doc => doc.data());
+    
+
+  // //   .then(function(doc) {
+  // //     if (doc.exists) {
+  // //         // console.log("Document data:", doc.data());
+  // //         // x = doc.data();
+  // //         return doc.data();
+  // //     } else {
+  // //         console.log("No such document!");
+  // //     }
+  // // }).catch(function(error) {
+  // //     console.log("Error getting document:", error);
+  // // });
+  // }
+
+  async allUserData() {
+    const markers = [];
+    await firebase.firestore().collection('users').get()
+      .then(querySnapshot => {
+        querySnapshot.docs.forEach(doc => {
+        markers.push(doc.data());
+      });
+    });
+    return markers;
+  }
+
+  async squadExerciseData(num) {
+    const markers = [];
+    await firebase.firestore().collection('exercises').get()
+      .then(querySnapshot => {
+        querySnapshot.docs.forEach(doc => {
+        // if (doc.data().squadNum == num) {
+          markers.push(doc.data());
+        // }    
+      });
+    });
+    return markers;
+  }
+
+  //returns exercises that are of 'difficulty/ squadNum' = 2
+  async squadExerciseData2(num) {
+    const markers = [];
+    await firebase.firestore().collection('exercises').where('difficulty', '==', num).get()
+      .then(querySnapshot => {
+        querySnapshot.docs.forEach(doc => {
+        // if (doc.data().squadNum == num) {
+          markers.push(doc.data());
+        // }    
+      });
+    });
+    return markers;
+  }
+
+  getSquadWeeklyExercises() {
+    // I will call this from tasks component
+    // need to check current user data for their squad num
+    // then get all the exercises with that squad number
+    // then choose a random 7 and return
+    // getUserData() --> current user data
+    var squadNum = this.getUserSquadNum(); //works
+    var exerciseData = this.squadExerciseData(squadNum);
+    return exerciseData;
+  }
+
+  getUserSquadNum(){
+    // Gets user data of current user
+   var  squadNum = this.db.collection('users').doc(firebase.auth().currentUser.uid).ref.get().then(function(doc) {
+                if (doc.exists) {
+                    // console.log("Document data:", doc.data());
+                    // x = doc.data();
+                    return doc.data().squadNum;
+                } else {
+                    console.log("No such document!");
+                }
+            }).catch(function(error) {
+                console.log("Error getting document:", error);
+            });
+
+    return squadNum;
+  }
+
 //   writeNewFieldToCollectionDocs() {
       
 //     for (let i=0; i<75; i++) {
@@ -117,9 +201,6 @@ export class FirebaseService {
 //           });
 //     }
 
-
 // }
 
-
 }
-  

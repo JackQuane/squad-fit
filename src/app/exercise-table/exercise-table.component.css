@@ -6,3 +6,7 @@
     padding: 8px 8px 8px 8px;
     justify-content: center;
   }
+
+  .mat-header-cell {
+    justify-content: center;
+  }

@@ -20,6 +20,11 @@
         <mat-cell *matCellDef="let exercise"> {{ exercise.technique }} </mat-cell>
       </ng-container>
 
+      <ng-container matColumnDef="difficulty">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Difficulty </mat-header-cell>
+        <mat-cell *matCellDef="let exercise"> {{ exercise.difficulty }} </mat-cell>
+      </ng-container>
+
       <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;" class="animate"></mat-row>
     </mat-table>

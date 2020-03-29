@@ -12,6 +12,11 @@
     width: 100%
   }
   
-  .cards {
+  .margin {
     margin-bottom: 8px;
+  }
+
+  .leaderB {
+    margin-left: 100px;
+    margin-right: 100px;
   }

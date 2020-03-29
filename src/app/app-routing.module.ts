@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
 import { RegisterComponent } from './register/register.component';
 import { ExerciseTableComponent } from './exercise-table/exercise-table.component';
+import { TasksComponent } from './tasks/tasks.component';
 
 
 
@@ -19,6 +20,7 @@ const appRoutes: Routes = [
   {path: 'about', component: PageComponent, data: {page: 'about'}, resolve: { data: UserResolver}},
   // {path: 'contact', component: PageComponent, data: {page: 'contact'}, resolve: { data: UserResolver}},
   { path: 'exTable', component: ExerciseTableComponent},
+  { path: 'tasks', component: TasksComponent},
   {path: 'new-user', component: NewUserComponent, resolve: { data: UserResolver}},
   // {path: '**', redirectTo: '/home', pathMatch: 'full'}
 
