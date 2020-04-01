@@ -7,6 +7,8 @@ import * as firebase from 'firebase/app';
 })
 export class FirebaseService {
 
+  toDoList: any;
+
   constructor(public db: AngularFirestore) {}
 
   getAvatars(){
@@ -29,6 +31,16 @@ export class FirebaseService {
   // getUsers(){
   //   return this.db.collection('users').snapshotChanges();
   // }
+
+  //get current points and then add 1
+  addPointToUser(currentPoints, currentCompTasks, taskName) {
+    // var c = this.getUserData();
+    currentCompTasks.push(taskName);
+    this.db.collection('users').doc(firebase.auth().currentUser.uid).set({
+      points: currentPoints+1,
+      completedTasks: currentCompTasks
+    }, {merge: true});
+  }
 
   getUserData(){
     // Gets user data of current user
@@ -65,7 +77,6 @@ export class FirebaseService {
 
     return this.db.collection('users').doc(firebase.auth().currentUser.uid).set({
       name: value.name,
-      // nameToSearch: value.name.toLowerCase()
       surname: value.surname,
       age: parseInt(value.age),
       avatar: avatar,
@@ -86,13 +97,10 @@ export class FirebaseService {
 
       if(exp == "none" && daysWk < 4){
         squadNum = 1;
-        console.log(squadNum);
       } else if (exp == "some" && daysWk < 6){
         squadNum = 2;
-        console.log(squadNum);
       } else if (exp == "loads"){
         squadNum = 3;
-        console.log(squadNum);
       }
       return squadNum;
   }
@@ -156,6 +164,7 @@ export class FirebaseService {
         // }    
       });
     });
+    console.log("squadExerciseData2");
     return markers;
   }
 
@@ -202,5 +211,26 @@ export class FirebaseService {
 //     }
 
 // }
+
+// getToDoList() {
+//   this.toDoList = this.db.list('titles');
+//   return this.toDoList;
+// }
+
+addTitle(title: string) {
+  this.toDoList.push({
+    title: title,
+    isChecked: false
+  });
+}
+
+checkOrUnCheckTitle($key: string, flag: boolean) {
+  this.toDoList.update($key, { isChecked: flag });
+}
+
+removeTitle($key: string) {
+  this.toDoList.remove($key);
+}
+
 
 }

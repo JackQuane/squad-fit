@@ -1,3 +1,62 @@
-<p>tasks works!</p>
+<!-- <img class="fullBg" [src]="assets/bg00.jpg"> -->
 <button mat-button (click)="clickFunction()">Click Me</button>
-<li *ngFor="let obj of exerciseData">{{obj | json}}</li>
+
+<!-- <li *ngFor="let obj of exerciseData">{{obj | json}}</li> -->
+
+
+<!-- <div class="jumbotron" style="padding:45px 0px">
+    <h4 class="text-center">To Do List App</h4>
+  </div>
+  
+  <div class="input-group">
+    <input type="text" class="form-control" #itemTitle>
+    <div class="input-group-addon hover-cursor" (click)="onAdd(itemTitle)">
+      <i class="fa fa-plus-circle fa-2x"></i>
+    </div>
+  </div>
+  
+  <div style="margin:5px 0px">
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let item of toDoListArray">
+        <span class="hover-cursor" [class.text-success]="item.isChecked" (click)="alterCheck(item.$key,item.isChecked)">
+          <i class="fa fa-lg" [ngClass]="item.isChecked?'fa-check-circle-o':'fa-circle-thin'"></i>
+        </span>
+        {{item.title}}
+        <span class="hover-cursor text-danger pull-right" (click)="onDelete(item.$key)">
+          <i class="fa fa-trash-o fa-lg"></i>
+        </span>
+      </li>
+    </ul>
+  </div> -->
+
+  <div class="basic-container">
+    <div class="example-container mat-elevation-z8">
+      <mat-table #table [dataSource]="dataSource" matSort [trackBy]="trackByUid" class="animate">
+  
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+          <mat-cell *matCellDef="let exercise"> {{ exercise.name }} </mat-cell>
+        </ng-container>
+  
+        <ng-container matColumnDef="technique">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Technique </mat-header-cell>
+          <mat-cell *matCellDef="let exercise"> {{ exercise.technique }} </mat-cell>
+        </ng-container>
+  
+        <ng-container matColumnDef="difficulty">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Difficulty </mat-header-cell>
+          <mat-cell *matCellDef="let exercise"> {{ exercise.difficulty }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <mat-header-cell  *matHeaderCellDef > <b>Mark as complete</b> </mat-header-cell>
+          <mat-cell *matCellDef="let exercise" >
+               <button mat-button (click)="completeTask(exercise.name)">Edit</button>
+          </mat-cell>
+        </ng-container>
+  
+        <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" class="animate"></mat-row>
+      </mat-table>
+    </div>
+  </div>

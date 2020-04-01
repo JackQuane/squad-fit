@@ -15,15 +15,12 @@ import { TasksComponent } from './tasks/tasks.component';
 
 
 const appRoutes: Routes = [
-  // {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: PageComponent, data: {page: 'home'}, resolve: { data: UserResolver}},
   {path: 'about', component: PageComponent, data: {page: 'about'}, resolve: { data: UserResolver}},
   // {path: 'contact', component: PageComponent, data: {page: 'contact'}, resolve: { data: UserResolver}},
-  { path: 'exTable', component: ExerciseTableComponent},
-  { path: 'tasks', component: TasksComponent},
+  { path: 'exTable', component: ExerciseTableComponent, resolve: { data: UserResolver}},
+  { path: 'tasks', component: TasksComponent, resolve: { data: UserResolver}},
   {path: 'new-user', component: NewUserComponent, resolve: { data: UserResolver}},
-  // {path: '**', redirectTo: '/home', pathMatch: 'full'}
-
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },

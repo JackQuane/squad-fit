@@ -17,7 +17,6 @@ export class ExerciseTableComponent implements AfterViewInit {
 
   _db:AngularFirestore;
   exercises:  Observable<any[]>;
-  //
   displayedColumns = ['name', 'technique', 'difficulty'];
   dataSource: MatTableDataSource<any>; 
 

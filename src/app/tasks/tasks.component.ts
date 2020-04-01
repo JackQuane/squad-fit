@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../shared/services/firebase.service';
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-tasks',
@@ -10,6 +11,9 @@ export class TasksComponent implements OnInit {
 
   userData: any;
   exerciseData: any;
+  toDoListArray: any[];
+  displayedColumns = ['name', 'technique', 'difficulty', 'actions'];
+  dataSource: MatTableDataSource<any>; 
 
   constructor(
     public firebaseService: FirebaseService
@@ -21,8 +25,24 @@ export class TasksComponent implements OnInit {
     this.userData = await this.firebaseService.getUserData();
     this.exerciseData = await this.firebaseService.squadExerciseData2(this.userData.squadNum);
 
-    // this.userData = await this.firebaseService.getSquadWeeklyExercises();
+    this.dataSource = new MatTableDataSource(this.exerciseData); 
+      // this.dataSource.sort = this.sort;
 
+    // this.userData = await this.firebaseService.getSquadWeeklyExercises();
+    // this.firebaseService.getToDoList().snapshotChanges()
+    // .subscribe(item => {
+    //   this.toDoListArray = [];
+    //   item.forEach(element => {
+    //     var x = element.payload.toJSON();
+    //     x["$key"] = element.key;
+    //     this.toDoListArray.push(x);
+    //   })
+
+    //   //sort array isChecked false  -> true
+    //     this.toDoListArray.sort((a,b) => {
+    //       return a.isChecked - b.isChecked;
+    //     })
+    // });
   }
 
   // formatData() {
@@ -42,9 +62,29 @@ export class TasksComponent implements OnInit {
   //   console.log("new format: " + userTestStatus);
   // }
 
-  clickFunction() {
-    let str = JSON.stringify(this.exerciseData)
-    console.log(str);
+  completeTask(exerciseName) {
+    // let str = JSON.stringify(this.exerciseData)
+    // console.log(str);
+
+    // each time this is clicked I need to add +1 to points
+    // I need only around 4 exercises and they need to be random
+
+    //I also need to add the name of the exercise to the 'completedTasks'
+    this.firebaseService.addPointToUser(this.userData.points, this.userData.completedTasks, exerciseName);
+    console.log(exerciseName);
   }
+
+  // onAdd(itemTitle) {
+  //   this.firebaseService.addTitle(itemTitle.value);
+  //   itemTitle.value = null;
+  // }
+
+  // alterCheck($key: string,isChecked) {
+  //   this.firebaseService.checkOrUnCheckTitle($key,!isChecked);
+  // }
+
+  // onDelete($key : string){
+  //   this.firebaseService.removeTitle($key);
+  // }
 
 }
